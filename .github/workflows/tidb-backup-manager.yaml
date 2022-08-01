@@ -1,23 +1,29 @@
-name: Publish
+name: tidb-backup-manager
 on:
   push:
     branches:
       - main
 
 jobs:
-  tikv:
+  build:
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: fengou1/tikv
-          branch: ebs_dev
+          repository: xu21yingan/tidb-operator
+          branch: br-ebs-snap
+      - name: Setup Go
+        uses: actions/setup-go@v3
+        with:
+          go-version: 1.18
+      - name: Build binaries
+        run: make build
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: gozssky/tikv
+          images: gozssky/tidb-backup-manager
           tags: |
             type=raw,value=v{{date 'YYYYMMDD'}}-{{sha}}
             type=raw,value=latest
@@ -35,7 +41,7 @@ jobs:
         with:
           push: true
           context: .
-          file: Dockerfile
+          file: images/tidb-backup-manager/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
         env:
@@ -43,4 +49,3 @@ jobs:
       - name: Image digest
         run:
           echo ${{ steps.docker_build.outputs.digest }}
- 
