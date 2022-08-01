@@ -1,4 +1,4 @@
-name: tidb-operator
+name: br
 on:
   push:
     branches:
@@ -7,25 +7,30 @@ on:
 jobs:
   build:
     runs-on: ubuntu-22.04
-    env:
-      TARGETARCH: amd64
     steps:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: xu21yingan/tidb-operator
-          ref: br-ebs-snap
+          repository: pingcap/tidb
+          ref: ebs-based-br
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
           go-version: 1.18
-      - name: Build binaries
-        run: make build
+      - name: Build
+        run: make build_br
+      - name: Create Dockerfile
+        run: |
+          cat > Dockerfile.br <<EOF 
+          FROM ubuntu:22.04
+          COPY ./bin/br /usr/local/bin/br
+          ENTRYPOINT ["/usr/local/bin/br"]
+          EOF
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
-          images: gozssky/tidb-operator
+          images: gozssky/br
           tags: |
             type=raw,value=v{{date 'YYYYMMDD'}}-{{sha}}
             type=raw,value=latest
@@ -42,9 +47,8 @@ jobs:
         uses: docker/build-push-action@v2
         with:
           push: true
-          context: images/tidb-operator
-          build-args: TARGETARCH=amd64
-          file: images/tidb-operator/Dockerfile
+          context: .
+          file: Dockerfile.br
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
         env:
