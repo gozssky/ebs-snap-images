@@ -43,6 +43,7 @@ jobs:
         with:
           push: true
           context: images/tidb-operator
+          build-args: TARGETARCH=amd64
           file: Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
