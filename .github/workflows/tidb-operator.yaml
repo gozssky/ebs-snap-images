@@ -44,7 +44,7 @@ jobs:
           push: true
           context: images/tidb-operator
           build-args: TARGETARCH=amd64
-          file: Dockerfile
+          file: images/tidb-operator/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
         env:

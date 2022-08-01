@@ -42,7 +42,7 @@ jobs:
           push: true
           context: images/tidb-backup-manager
           build-args: TARGETARCH=amd64
-          file: Dockerfile
+          file: images/tidb-backup-manager/Dockerfile
           tags: ${{ steps.docker_meta.outputs.tags }}
           labels: ${{ steps.docker_meta.outputs.labels }}
         env:
