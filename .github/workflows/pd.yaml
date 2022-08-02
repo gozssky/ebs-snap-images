@@ -11,8 +11,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: 3pointer/pd
-          ref: add_alloc_id
+          repository: fengou1/pd.git
+          ref: ebs
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
