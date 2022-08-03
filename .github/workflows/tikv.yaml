@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: fengou1/tikv
-          branch: ebs_dev
+          ref: ebs_dev
       - name: Setup Dockerfile
         run: sed -i 's/build_dist_release/release/g' Dockerfile
       - name: Docker meta
