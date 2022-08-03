@@ -23,8 +23,8 @@ jobs:
         run: |
           cat > Dockerfile.br <<EOF 
           FROM ubuntu:22.04
-          COPY ./bin/br /usr/local/bin/br
-          ENTRYPOINT ["/usr/local/bin/br"]
+          COPY ./bin/br /br
+          ENTRYPOINT ["/br"]
           EOF
       - name: Docker meta
         id: docker_meta
