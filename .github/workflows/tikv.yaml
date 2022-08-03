@@ -18,7 +18,20 @@ jobs:
           repository: fengou1/tikv
           ref: ebs_dev
       - name: Setup Dockerfile
-        run: sed -i 's/build_dist_release/release/g' Dockerfile
+        run: |
+          cat > Dockerfile <<EOF 
+          FROM rust:1.57 as builder
+          WORKDIR /tikv
+          COPY . .
+          RUN make release
+
+          FROM debian:11
+          RUN apt update && apt install ca-certificates -y && apt clean
+          COPY --from=builder /tikv/target/release/tikv-server /tikv-server
+          COPY --from=builder /tikv/target/release/tikv-ctl /tikv-ctl
+          EXPOSE 20160 20180
+          ENTRYPOINT ["/tikv-server"]
+          EOF
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
