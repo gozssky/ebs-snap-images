@@ -17,6 +17,9 @@ jobs:
         with:
           repository: pingcap/tidb
           ref: ebs-based-br
+      - name: Setup tag
+        run: |
+          git tag v6.2.0-alpha
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
