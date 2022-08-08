@@ -29,6 +29,7 @@ jobs:
 
           FROM debian:11
           RUN apt update && apt install ca-certificates -y && apt clean
+          RUN ln -sf /bin/bash /bin/sh
           COPY --from=builder /tikv/target/release/tikv-server /tikv-server
           COPY --from=builder /tikv/target/release/tikv-ctl /tikv-ctl
           EXPOSE 20160 20180
