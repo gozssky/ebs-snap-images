@@ -24,6 +24,9 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: 1.18
+      - name: Download kubectl
+        run: |
+          curl -LO https://dl.k8s.io/release/v1.22.4/bin/linux/amd64/kubectl && mv kubectl br/pkg/hack/
       - name: Build
         run: make build_br
       - name: Docker meta
