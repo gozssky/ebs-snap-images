@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: pingcap/tidb
+          repository: gozssky/tidb
           ref: ebs-based-br
       - name: Setup tag
         run: |
@@ -26,13 +26,6 @@ jobs:
           go-version: 1.18
       - name: Build
         run: make build_br
-      - name: Create Dockerfile
-        run: |
-          cat > Dockerfile.br <<EOF 
-          FROM ubuntu:22.04
-          COPY ./bin/br /br
-          ENTRYPOINT ["/br"]
-          EOF
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
