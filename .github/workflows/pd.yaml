@@ -20,13 +20,16 @@ jobs:
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
+      - name: Set docker sha
+        run: |
+          echo "DOCKER_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Docker meta
         id: docker_meta
         uses: docker/metadata-action@v3
         with:
           images: gozssky/pd
           tags: |
-            type=raw,value=v{{date 'YYYYMMDD'}}-{{sha}}
+            type=raw,value=v{{date 'YYYYMMDD'}}-${{ env.DOCKER_SHA }}
             type=raw,value=latest
       # The v2 version of docker/build-push-action uses Docker Buildx to build.
       - name: Docker Setup Buildx

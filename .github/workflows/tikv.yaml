@@ -17,6 +17,9 @@ jobs:
         with:
           repository: fengou1/tikv
           ref: ebs_dev
+      - name: Set docker sha
+        run: |
+          echo "DOCKER_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
       - name: Setup Dockerfile
         run: |
           sed -i 's/.git//g' .dockerignore
@@ -41,7 +44,7 @@ jobs:
         with:
           images: gozssky/tikv
           tags: |
-            type=raw,value=v{{date 'YYYYMMDD'}}-{{sha}}
+            type=raw,value=v{{date 'YYYYMMDD'}}-${{ env.DOCKER_SHA }}
             type=raw,value=latest
       # The v2 version of docker/build-push-action uses Docker Buildx to build.
       - name: Docker Setup Buildx
