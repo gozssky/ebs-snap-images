@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: 3pointer/pd
-          ref: add_alloc_id
+          repository: fengou1/pd
+          ref: ebs
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha

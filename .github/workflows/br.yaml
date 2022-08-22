@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: gozssky/tidb
-          ref: ebs-based-br
+          ref: ebs_dev
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
