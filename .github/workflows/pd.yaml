@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: fengou1/pd
-          ref: ebs
+          repository: tikv/pd
+          ref: master
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
