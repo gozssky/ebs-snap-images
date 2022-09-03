@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: gozssky/tidb
+          repository: fengou1/tidb
           ref: ebs_dev
       - name: Setup tag
         run: |
