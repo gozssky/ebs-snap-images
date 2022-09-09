@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v3
         with:
           repository: gozssky/tidb-operator
-          ref: br-ebs-snap
+          ref: ebs_dev
       - name: Set docker sha
         run: |
           echo "DOCKER_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
