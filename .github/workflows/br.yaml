@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: D3Hunter/tidb
-          ref: change-flag-name
+          repository: fengou1/tidb
+          ref: ebs_dev
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
