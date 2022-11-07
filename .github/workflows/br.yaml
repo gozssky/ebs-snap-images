@@ -30,9 +30,7 @@ jobs:
       - name: Build
         run: make build_br
       - name: Create Dockerfile
-        run: |
-          ls
-          ls bin || true
+          rm -f .dockerignore
           cat > Dockerfile.br <<EOF 
           FROM ubuntu:22.04
           COPY ./bin/br /br
