@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: gozssky/tidb-operator
-          ref: ebs_dev
+          repository: pingcap/tidb-operator
+          ref: issue
       - name: Set docker sha
         run: |
           echo "DOCKER_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
