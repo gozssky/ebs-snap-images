@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: yujuncen/tidb
-          ref: cache-storage
+          repository: fengou1/tidb
+          ref: idc
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
