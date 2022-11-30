@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: JmPotato/tikv
-          ref: flashback_resolved_ts 
+          repository: tikv/tikv
+          ref: master
       - name: Set docker sha
         run: |
           echo "DOCKER_SHA=$(git rev-parse --short HEAD)" >> $GITHUB_ENV
