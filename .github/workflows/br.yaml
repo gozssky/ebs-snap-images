@@ -15,8 +15,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          repository: fengou1/tidb
-          ref: ebs_idc
+          repository: pingcap/tidb
+          ref: master
       - name: Setup tag
         run: |
           git tag v6.2.0-alpha
